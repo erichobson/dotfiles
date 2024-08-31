@@ -1,52 +1,12 @@
---
--- -- Set highlight on search, but clear on pressing <Esc> in normal mode
--- -- vim.opt.hlsearch = true
--- -- Map('n', '<Esc>', '<cmd>nohlsearch<CR>', 'Clear search highlighting')
---
--- -- Highlight on yank
--- vim.api.nvim_create_autocmd('TextYankPost', {
---     desc = 'Highlight when yanking text',
---     callback = function()
---         vim.highlight.on_yank()
---     end,
---     group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
---     pattern = '*',
--- })
---
--- -- Remove trailing whitespace on save
--- vim.api.nvim_create_autocmd('BufWritePre', {
---     pattern = '*',
---     callback = function()
---         local save_cursor = vim.fn.getpos('.')
---         vim.cmd([[%s/\s\+$//e]])
---         vim.fn.setpos('.', save_cursor)
---     end
--- })
---
---
--- -- Auto resize splits
--- vim.api.nvim_create_autocmd('VimResized', {
---     callback = function()
---         vim.cmd('tabdo wincmd =')
---     end
--- })
---
--- -- Set wrap and spell for test files
--- vim.api.nvim_create_autocmd('FileType', {
---     pattern = { 'gitcommit', 'markdown', 'text' },
---     callback = function()
---         vim.opt_local.wrap = true
---         vim.opt_local.spell = true
---     end
--- })
---
--- -- Open help windows in vertical split
--- vim.api.nvim_create_autocmd('FileType', {
---     pattern = 'help',
---     callback = function()
---         vim.cmd('wincmd L')
---     end
--- })
+-- Remove trailing whitespace on save
+vim.api.nvim_create_autocmd('BufWritePre', {
+    pattern = '*',
+    callback = function()
+        local save_cursor = vim.fn.getpos('.')
+        vim.cmd([[%s/\s\+$//e]])
+        vim.fn.setpos('.', save_cursor)
+    end
+})
 
 -- Executes the callback function every time a
 -- language server is attached to a buffer.
@@ -71,6 +31,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', keymap_opts("Code Action"))
     end,
 })
+
+-- Reset cursor style on exit
 vim.cmd([[
-  au VimLeave * set guicursor=a:hor20-blinkwait800
+    au VimLeave * set guicursor=a:hor20-blinkwait800
 ]])
