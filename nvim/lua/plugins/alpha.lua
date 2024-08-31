@@ -26,14 +26,12 @@ return {
 
         -- Set menu items with the provided buttons
         dashboard.section.buttons.val = {
-            -- dashboard.button('n', '󰠮  Notes', ':enew | set filetype=markdown <CR>'),
-            -- dashboard.button('fF', '󰈔  File/path', ':Telescope find_files find_command=rg,--hidden,--files <CR>'),
-            -- dashboard.button('l', '  Commands', ':Legendary <CR>'),
+            dashboard.button('e', '  New File', ':ene <BAR> startinsert <CR>'),
+            dashboard.button('l', '  Commands', ':Legendary <CR>'),
             dashboard.button('u', '  Update', ':Lazy sync <CR>'),
-            dashboard.button('p', '󰓅  Profile', ':Lazy profile <CR>'),
             dashboard.button('q', '  Quit', ':q! <CR>'),
+            dashboard.button('b', '  Close All Buffers', ':%bd|e#|bd# <CR>'),
         }
-
         -- Set the footer
         dashboard.section.footer.val = { ' ', ' ᓚᘏᗢ ' }
 

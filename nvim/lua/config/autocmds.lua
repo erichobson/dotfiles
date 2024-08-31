@@ -71,3 +71,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', keymap_opts("Code Action"))
     end,
 })
+vim.cmd([[
+  au VimLeave * set guicursor=a:hor20-blinkwait800
+]])
