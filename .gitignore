@@ -1,1 +1,19 @@
+# macOS
 **/.DS_Store
+
+# zsh
+zsh/**/.antidote/
+zsh/**/.zcompcache/
+zsh/**/.zsh_sessions/
+zsh/**/.zcompdump*
+zsh/**/.zsh_history
+zsh/**/.zsh_plugins.zsh
+zsh/**/*.bak
+zsh/**/*.local
+zsh/**/*.local.zsh
+zsh/**/*.zwc
+zsh/**/*.zwc.old
+zsh/~*
+
+# nvim
+nvim/lazy-lock.json
