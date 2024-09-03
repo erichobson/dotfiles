@@ -1,0 +1,13 @@
+#!/bin/zsh
+##? note - Create a new note and store  it in Obsidian.
+
+function note {
+  local title="$1"
+
+  if [[ -z "$title" ]]; then
+    echo "Usage: note <title>"
+    return 1
+  fi
+
+  nvim "/$OBSIDIAN/$title.md"
+}
