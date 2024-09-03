@@ -13,6 +13,9 @@ fi
 # Zsh options.
 setopt extended_glob
 
+# Add a path to Obsidian
+export OBSIDIAN="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault"
+
 # Autoload functions you might want to use with antidote.
 ZFUNCDIR=${ZFUNCDIR:-$ZDOTDIR/functions}
 fpath=($ZFUNCDIR $fpath)
