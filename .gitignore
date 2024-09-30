@@ -17,6 +17,7 @@ zsh/~*
 
 # nvim
 nvim/lazy-lock.json
+nvim/lua/temp
 
 # ghc
 ghc/
