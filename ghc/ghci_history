@@ -1,0 +1,100 @@
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+:re
+difference dict1 dict2
+:re
+difference dict1 dict2
+:re
+difference dict1 dict2
+:re
+difference dict1 dict2
+:re
+difference dict1 dict2
+:re
+intersect db1 db2
+:re
+intersect db1 db2
+:re
+intersect db1 db2
+:re
+deNeg db1
+:re
+unNeg db1
+:re
+difference dict1 dict2
+:re
+difference dict1 dict2
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+pre "ba" dict1
+:re
+ls
+pre "ba" dict1
+:re
+:re
+pre "ba" dict1
+:re
+runQuery db SumColumns 
+:re
+equivDB (DB []) (DB [[1, 1]])
+equivDB (DB []) (DB [1, 1])
+:re
+:re
+runQuery db SumColumns 
+:re
+runQuery db SumColumns 
+printDB $ runTransform dbUnsorted Sort
+printDB $runTransform dbUnsorted Sort
+runTransform dbUnsorted Sort
+:re
+runTransform (DB []) (DeleteRow 5)
+printDB $ runTransform (DB []) (DeleteRow 5)
+printDB $ runTransform db (DeleteRow 5)
+printDB $ runTransform db (DeleteRow 1)
+printDB $ runTransform db (DeleteRow 11)
+printDB runTransform db (DeleteRow 11)
+runTransform db (DeleteRow 11)
+runTransform db (DeleteRow 1)
+runTransform db (DeleteRow 1
+:re
+runTransform db (AddRow [11, 1, 1, 2, 3, 4])
+runTransform db (AddRow [11, 1, 1, 2, 3])
+runTransform db (AddRow [1, 1, 1, 2, 3])
+runTransform db (AddRow [1, 1, 1, 2])
+runTransform db (AddRow [1, 1])
+:re
+runQuery (DB []) CountRows
+runQuery (DB []) SumColumns
+:re
+runQuery (DB []) SumColumns
+:re
+runQuery (DB []) SumColumns
+runQuery (DB []) SumColumns
+:re
+runQuery (DB [[1, 2], [2, 3], [2, 4]]) Validate
+runQuery (DB [[1, 2], [2, 3], [3, 4, 5]]) Validate
+runQuery (DB [[1, 2], [2, 3], [3, 4]]) Validate
