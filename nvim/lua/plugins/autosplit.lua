@@ -1,9 +1,14 @@
 return {
-    'yochem/autosplit.nvim',
+    "yochem/autosplit.nvim",
+    event = "VimEnter",
     config = function()
-        require('autosplit').setup({
-            split = 'auto',    -- choose one of 'auto', 'horizontal' and 'vertical'
-            min_win_width = 80 -- the minimal width you want for a splitted window
+        local autosplit = require("autosplit")
+
+        autosplit.setup({
+            split = "auto",
+            min_win_width = 80,
         })
-    end
+
+        vim.keymap.set("n", "<leader>s", ":Split<CR>", { noremap = true, silent = true, desc = "Auto split" })
+    end,
 }

@@ -1,14 +1,19 @@
 return {
-    'neovim/nvim-lspconfig',
-    cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
-    event = { 'BufReadPre', 'BufNewFile' },
+    "neovim/nvim-lspconfig",
+    cmd = { "LspInfo", "LspInstall", "LspStart" },
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-        'hrsh7th/cmp-nvim-lsp',
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
+        {
+            "williamboman/mason.nvim",
+            lazy = false,
+            config = true,
+        },
+        "williamboman/mason-lspconfig.nvim",
+        "hrsh7th/cmp-nvim-lsp",
     },
 
     config = function()
+        require("mason").setup()
         require("mason-lspconfig").setup()
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -20,24 +25,17 @@ return {
                 })
             end,
             lua_ls = function()
-                require('lspconfig').lua_ls.setup({
+                require("lspconfig").lua_ls.setup({
                     settings = {
                         Lua = {
                             diagnostics = {
                                 globals = { "vim" },
-                                severity = "Warning"
-                            }
-                        }
-                    }
+                                severity = "Warning",
+                            },
+                        },
+                    },
                 })
-            end
+            end,
         })
     end,
-
-    keys = {
-        { '<leader>do', mode = { 'n' }, vim.diagnostic.open_float, desc = 'Diagnostic Open Float' },
-        { '<leader>dp', mode = { 'n' }, vim.diagnostic.goto_prev,  desc = 'Diagnostic Goto Prev' },
-        { '<leader>dn', mode = { 'n' }, vim.diagnostic.goto_next,  desc = 'Diagnostic Goto Next' },
-        { '<leader>dl', mode = { 'n' }, vim.diagnostic.setloclist, desc = 'Diagnostic Set Loclist' },
-    },
 }

@@ -1,24 +1,18 @@
 return {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
+    "folke/noice.nvim",
+    event = "VeryLazy",
     opts = {
         -- add any options here
     },
     dependencies = {
-        'MunifTanjim/nui.nvim',
-        'rcarriga/nvim-notify',
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
     },
 
     config = function()
-        local status_ok, noice = pcall(require, 'noice')
-        if not status_ok then
-            vim.notify('Failed to load noice.nvim', vim.log.levels.ERROR)
-            return
-        end
-
-        noice.setup({
+        require("noice").setup({
             lsp = {
-                progress = { enabled = true },
+                progress = { enabled = false },
                 hover = {
                     enabled = true,
                     silent = false, -- set to true to not show a message if hover is not available
@@ -42,6 +36,7 @@ return {
                     view = "notify",
                     opts = {},
                 },
+
                 -- defaults for hover and signature help
                 documentation = {
                     view = "hover",
@@ -57,22 +52,22 @@ return {
             views = {
                 cmdline_popup = {
                     border = {
-                        style = 'none',
+                        style = "rounded",
                         padding = { 2, 3 },
                     },
                     filter_options = {},
                     win_options = {
-                        winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+                        winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
                     },
                 },
             },
             cmdline = {
                 format = {
                     search_down = {
-                        view = 'cmdline',
+                        view = "cmdline",
                     },
                     search_up = {
-                        view = 'cmdline',
+                        view = "cmdline",
                     },
                 },
             },

@@ -1,49 +1,51 @@
 return {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     dependencies = {
-        'nvim-tree/nvim-web-devicons',
-        'AndreM222/copilot-lualine'
+        "nvim-tree/nvim-web-devicons",
+        -- "AndreM222/copilot-lualine",
     },
     config = function()
-        require('lualine').setup({
+        require("lualine").setup({
             options = {
                 icons_enabled = true,
-                theme = 'eldritch',
-                component_separators = '',
-                section_separators = { left = '', right = '' },
+                theme = "catppuccin-mocha",
+                component_separators = "",
+                section_separators = { left = "", right = "" },
+                globalstatus = true,
             },
             sections = {
-                lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
+                lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
                 lualine_b = {
-                    'filename',
-                    'branch'
+                    "filename",
+                    "branch",
                 },
                 lualine_c = {
-                    '%=', --[[ add your center compoentnts here in place of this comment ]]
+                    "%=",
+                    -- "lsp_progress",
                 },
                 lualine_x = {},
                 lualine_y = {
-                    'filetype',
-                    'copilot' },
+                    "filetype",
+                    -- "copilot",
+                },
                 lualine_z = {
-                    { 'location', separator = { right = '' }, left_padding = 2 },
+                    { "location", separator = { right = "" }, left_padding = 2 },
                 },
             },
             inactive_sections = {
-                lualine_a = { 'filename' },
+                lualine_a = { "filename" },
                 lualine_b = {},
                 lualine_c = {},
                 lualine_x = {},
                 lualine_y = {},
-                lualine_z = { 'location' },
+                lualine_z = { "location" },
             },
             extensions = {
-                'lazy',
-                'mason',
-                'neo-tree',
-                'oil',
-                'toggleterm'
+                "lazy",
+                "mason",
+                "neo-tree",
+                "toggleterm",
             },
         })
-    end
+    end,
 }

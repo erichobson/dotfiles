@@ -1,10 +1,10 @@
 return {
-    'folke/which-key.nvim',
-    event = 'VeryLazy',
+    "folke/which-key.nvim",
+    event = "VeryLazy",
     opts = {
-        preset = 'modern', -- classic, modern, helix
+        preset = "modern",
     },
     config = function(_, opts)
-        require('which-key').setup(opts)
+        require("which-key").setup(opts)
     end,
 }

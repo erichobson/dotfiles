@@ -1,9 +1,9 @@
 return {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     config = function()
-        require('nvim-treesitter.configs').setup({
-            ensure_installed = { "c", "cpp", "lua", "python" },
+        require("nvim-treesitter.configs").setup({
+            ensure_installed = { "c", "cpp", "lua", "python", "dockerfile" },
             highlight = { enable = true },
             indent = { enable = true },
             autotag = { enable = true, enable_close_on_slash = false },
