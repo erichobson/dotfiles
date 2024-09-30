@@ -1,4 +1,3 @@
-#!/bin/zsh
 #
 # .zsh_plugins.txt - antidote plugins file
 #
@@ -37,6 +36,8 @@ https://github.com/peterhurford/up.zsh
 rummik/zsh-tailf
 mattmc3/zman
 agkozak/zsh-z
+#MichaelAquilina/zsh-you-should-use
+fdellwing/zsh-bat
 
 
 ### Local Plugins
@@ -80,7 +81,7 @@ $ZDOTDIR/.aliases
 ###
 
 # Use kind:fpath for prompts you want available to promptinit.
-romkatv/powerlevel10k
+# romkatv/powerlevel10k
 
 
 ### Utilities
