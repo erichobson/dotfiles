@@ -1,4 +1,18 @@
-command_timeout = 20000  # Timeout in milliseconds (20 seconds)
+"$schema" = 'https://starship.rs/config-schema.json'
+command_timeout = 20000
+palette = "catppuccin_mocha"
+
+[character]
+success_symbol = "[[󰄛](green) ❯](peach)"
+error_symbol = "[[󰄛](red) ❯](peach)"
+vimcmd_symbol = "[󰄛 ❮](subtext1)"
+
+[git_branch]
+style = "bold mauve"
+
+[directory]
+truncation_length = 4
+style = "bold lavender"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
@@ -27,6 +41,4 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
-
-palette = "catppuccin_mocha"
 
