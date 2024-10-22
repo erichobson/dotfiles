@@ -1,14 +1,30 @@
+--          ╭─────────────────────────────────────────────────────────╮
+--          │                      lualine.nvim                       │
+--          │      https://github.com/nvim-lualine/lualine.nvim       │
+--          ╰─────────────────────────────────────────────────────────╯
+
+-- local function search_result()
+--     if vim.v.hlsearch == 0 then
+--         return ""
+--     end
+--     local last_search = vim.fn.getreg("/")
+--     if not last_search or last_search == "" then
+--         return ""
+--     end
+--     local searchcount = vim.fn.searchcount({ maxcount = 9999 })
+--     return last_search .. "(" .. searchcount.current .. "/" .. searchcount.total .. ")"
+-- end
+
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
-        -- "AndreM222/copilot-lualine",
     },
+
     config = function()
         require("lualine").setup({
             options = {
                 icons_enabled = true,
-                theme = "catppuccin-mocha",
                 component_separators = "",
                 section_separators = { left = "", right = "" },
                 globalstatus = true,
@@ -20,13 +36,23 @@ return {
                     "branch",
                 },
                 lualine_c = {
-                    "%=",
-                    -- "lsp_progress",
+                    -- "%=",
+                    -- { search_result },
                 },
-                lualine_x = {},
+                lualine_x = {
+                    {
+                        "diagnostics",
+                        source = { "nvim" },
+                        sections = { "error" },
+                    },
+                    {
+                        "diagnostics",
+                        source = { "nvim" },
+                        sections = { "warn" },
+                    },
+                },
                 lualine_y = {
                     "filetype",
-                    -- "copilot",
                 },
                 lualine_z = {
                     { "location", separator = { right = "" }, left_padding = 2 },
@@ -44,7 +70,6 @@ return {
                 "lazy",
                 "mason",
                 "neo-tree",
-                "toggleterm",
             },
         })
     end,

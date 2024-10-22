@@ -1,13 +1,12 @@
 --          ╭─────────────────────────────────────────────────────────╮
---          │                        Which Key                        │
---          │         https://github.com/folke/which-key.nvim         │
+--          │                      markview.nvim                      │
+--          │        https://github.com/OXY2DEV/markview.nvim         │
 --          ╰─────────────────────────────────────────────────────────╯
 return {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    config = function()
-        require("which-key").setup({
-            preset = "modern",
-        })
-    end,
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-tree/nvim-web-devicons",
+    },
 }

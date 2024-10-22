@@ -1,3 +1,7 @@
+--          ╭─────────────────────────────────────────────────────────╮
+--          │                     telescope.nvim                      │
+--          │    https://github.com/nvim-telescope/telescope.nvim     │
+--          ╰─────────────────────────────────────────────────────────╯
 return {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
@@ -105,7 +109,6 @@ return {
             end,
             desc = "Keymaps",
         },
-        -- New keybindings
         {
             mode = { "n" },
             "<leader>fc",

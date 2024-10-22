@@ -1,13 +1,15 @@
 --          ╭─────────────────────────────────────────────────────────╮
---          │                        Which Key                        │
---          │         https://github.com/folke/which-key.nvim         │
+--          │                     Cinnamon Scroll                     │
+--          │        https://github.com/declancm/cinnamon.nvim        │
 --          ╰─────────────────────────────────────────────────────────╯
 return {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    config = function()
-        require("which-key").setup({
-            preset = "modern",
-        })
-    end,
+    "declancm/cinnamon.nvim",
+    version = "*",
+    opts = {
+        keymaps = {
+            basic = true,
+            extra = true,
+        },
+        options = { mode = "cursor", delay = 5 },
+    },
 }

@@ -1,3 +1,7 @@
+--          ╭─────────────────────────────────────────────────────────╮
+--          │                       alpha-nvim                        │
+--          │          https://github.com/goolord/alpha-nvim          │
+--          ╰─────────────────────────────────────────────────────────╯
 return {
     "goolord/alpha-nvim",
     config = function()
@@ -20,7 +24,6 @@ return {
         ]]
         logo = string.rep("\n", 2) .. logo
         dashboard.section.header.val = vim.split(logo, "\n")
-
         dashboard.section.buttons.val = {
             dashboard.button("e", "  New File", ":ene <BAR> startinsert <CR>"),
             dashboard.button("u", "  Update", ":Lazy sync <CR>"),

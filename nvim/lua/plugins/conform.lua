@@ -1,5 +1,12 @@
+--          ╭─────────────────────────────────────────────────────────╮
+--          │                      conform.nvim                       │
+--          │        https://github.com/stevearc/conform.nvim         │
+--          ╰─────────────────────────────────────────────────────────╯
 return {
     "stevearc/conform.nvim",
+    dependencies = {
+        "williamboman/mason.nvim",
+    },
     opts = {
         formatters_by_ft = {
             lua = { "stylua" },

@@ -1,14 +1,22 @@
+--          ╭─────────────────────────────────────────────────────────╮
+--          │                     autosplit.nvim                      │
+--          │        https://github.com/yochem/autosplit.nvim         │
+--          ╰─────────────────────────────────────────────────────────╯
 return {
     "yochem/autosplit.nvim",
     event = "VimEnter",
     config = function()
-        local autosplit = require("autosplit")
-
-        autosplit.setup({
+        require("autosplit").setup({
             split = "auto",
             min_win_width = 80,
         })
-
-        vim.keymap.set("n", "<leader>s", ":Split<CR>", { noremap = true, silent = true, desc = "Auto split" })
     end,
+    keys = {
+        {
+            "<leader>s",
+            "<CMD>Split<CR>",
+            mode = "n",
+            desc = "Auto split",
+        },
+    },
 }

@@ -1,43 +1,46 @@
+--          ╭─────────────────────────────────────────────────────────╮
+--          │               Noice (Nice, Noise, Notice)               │
+--          │           https://github.com/folke/noice.nvim           │
+--          ╰─────────────────────────────────────────────────────────╯
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = {
-        -- add any options here
-    },
     dependencies = {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
     },
-
     config = function()
         require("noice").setup({
             lsp = {
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
+                },
                 progress = { enabled = false },
                 hover = {
                     enabled = true,
-                    silent = false, -- set to true to not show a message if hover is not available
-                    view = nil, -- when nil, use defaults from documentation
-                    opts = {}, -- merged with defaults from documentation
+                    silent = false,
+                    view = nil,
+                    opts = {},
                 },
                 signature = {
                     enabled = true,
                     auto_open = {
                         enabled = true,
-                        trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
-                        luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-                        throttle = 50, -- Debounce lsp signature help request by 50ms
+                        trigger = true,
+                        luasnip = true,
+                        throttle = 50,
                     },
-                    view = nil, -- when nil, use defaults from documentation
-                    opts = {}, -- merged with defaults from documentation
+                    view = nil,
+                    opts = {},
                 },
                 message = {
-                    -- Messages shown by lsp servers
                     enabled = true,
                     view = "notify",
                     opts = {},
                 },
 
-                -- defaults for hover and signature help
                 documentation = {
                     view = "hover",
                     opts = {
@@ -55,30 +58,56 @@ return {
                         style = "rounded",
                         padding = { 2, 3 },
                     },
+                    position = {
+                        row = "50%",
+                        col = "50%",
+                    },
                     filter_options = {},
                     win_options = {
                         winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
                     },
                 },
             },
+
             cmdline = {
+                enabled = true,
+                view = "cmdline_popup",
                 format = {
-                    search_down = {
-                        view = "cmdline",
-                    },
-                    search_up = {
-                        view = "cmdline",
-                    },
+                    cmdline = { icon = ":" },
+                    search_down = { icon = "/" },
+                    search_up = { icon = "?" },
+                    filter = { icon = "$" },
+                    lua = { icon = "" },
+                    help = { icon = "" },
                 },
             },
-            -- you can enable a preset for easier configuration
-            -- presets = {
-            --     bottom_search = true,         -- use a classic bottom cmdline for search
-            --     command_palette = false,      -- position the cmdline and popupmenu together
-            --     long_message_to_split = true, -- long messages will be sent to a split
-            --     inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-            --     lsp_doc_border = false,       -- add a border to hover docs and signature help
-            -- },
+            popupmenu = {
+                enabled = true,
+                backend = "nui",
+            },
+            history = {
+                enabled = true,
+                view = "split",
+            },
+            messages = {
+                enabled = true,
+                view = "notify",
+                view_error = "notify",
+                view_warn = "notify",
+                view_history = "messages",
+                view_search = "virtualtext",
+            },
+            notify = {
+                enabled = true,
+                view = "notify",
+            },
+            presets = {
+                bottom_search = false,
+                command_palette = true,
+                long_message_to_split = true,
+                inc_rename = false,
+                lsp_doc_border = true,
+            },
         })
     end,
 }

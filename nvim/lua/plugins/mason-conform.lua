@@ -1,13 +1,14 @@
 --          ╭─────────────────────────────────────────────────────────╮
---          │                        Which Key                        │
---          │         https://github.com/folke/which-key.nvim         │
+--          │                   mason-conform.nvim                    │
+--          │      https://github.com/zapling/mason-conform.nvim      │
 --          ╰─────────────────────────────────────────────────────────╯
 return {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
+    "zapling/mason-conform.nvim",
+    dependencies = {
+        "williamboman/mason.nvim",
+        "stevearc/conform.nvim",
+    },
     config = function()
-        require("which-key").setup({
-            preset = "modern",
-        })
+        require("mason-conform").setup()
     end,
 }
