@@ -1,41 +1,57 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
+# Reload scripting additions when Dock restarts (required for macOS for certain features)
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
-yabai -m config external_bar               all:40:0       \
-                mouse_follows_focus        off            \
-                focus_follows_mouse        off            \
-                window_zoom_persist        off            \
-                window_placement           second_child   \
-                window_shadow              float          \
-                window_opacity             on             \
-                window_opacity_duration    0.2            \
-                active_window_opacity      1.0            \
-                normal_window_opacity      0.8            \
-                window_animation_duration  0.15           \
-                window_animation_easing    ease_out_circ  \
-                insert_feedback_color      0xff9dd274     \
-                split_ratio                0.5            \
-                auto_balance               on             \
-                mouse_modifier             fn             \
-                mouse_action1              move           \
-                mouse_action2              resize         \
-                mouse_drop_action          swap           \
-                                                          \
-                top_padding                8              \
-                bottom_padding             8              \
-                left_padding               8              \
-                right_padding              8              \
-                window_gap                 10
+# Define color variables for reusability
+BORDER_COLOR_ACTIVE=0xff9dd274
+BORDER_COLOR_NORMAL=0xff555555
 
-# Exclude problematic apps from being managed:
-yabai -m rule --add app="^(LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Raycast|ThinkBuddy|Alfred|Activity Monitor)$" manage=off
-yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
-yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
-yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
-yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
+# General settings
+yabai -m config \
+    mouse_follows_focus           on \
+    focus_follows_mouse           autofocus \
+    window_zoom_persist           off \
+    window_placement              second_child \
+    window_shadow                 float \
+    window_opacity                on \
+    window_opacity_duration       0.2 \
+    active_window_opacity         1.0 \
+    normal_window_opacity         0.8 \
+    window_animation_duration     0.15 \
+    window_animation_easing       ease_out_circ \
+    insert_feedback_color         $BORDER_COLOR_ACTIVE \
+    split_ratio                   0.5 \
+    auto_balance                  on \
+    mouse_modifier                fn \
+    mouse_action1                 move \
+    mouse_action2                 resize \
+    mouse_drop_action             swap \
+    top_padding                   8 \
+    bottom_padding                8 \
+    left_padding                  8 \
+    right_padding                 8 \
+    window_gap                    8 \
+    warp_cursor                   focus \
+    window_border                 on \
+    window_border_width           3 \
+    active_window_border_color    $BORDER_COLOR_ACTIVE \
+    normal_window_border_color    $BORDER_COLOR_NORMAL \
+    layout                        bsp
 
-yabai -m config layout bsp
+# Applications to float (not managed by yabai)
+FLOAT_APPS="^(Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|App Store|Steam|Raycast|ThinkBuddy|Activity Monitor|Finder|Monarch|MediaMate|NotchNook|Alcove|UTM)$"
+yabai -m rule --add app="$FLOAT_APPS" manage=off
 
-echo "yabai configuration loaded.."
+# Exclude system dialogs and alerts from management
+SYSTEM_DIALOGS="^(System Preferences|System Settings|About This Mac|Print|Scanner|FaceTime)$"
+yabai -m rule --add app="$SYSTEM_DIALOGS" manage=off
+
+# Update Raycast extension when space changes
+yabai -m signal --add event=space_changed action="nohup open -g raycast://extensions/krzysztoff1/yabai/screens-menu-bar?launchType=background > /dev/null 2>&1 &"
+
+# Close notification windows after a delay
+yabai -m signal --add event=window_created app="NotificationCenter" action="sleep 5; yabai -m window \$YABAI_WINDOW_ID --close"
+
+echo "yabai configuration loaded..."
