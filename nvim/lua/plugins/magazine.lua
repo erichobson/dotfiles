@@ -1,7 +1,3 @@
---          ╭─────────────────────────────────────────────────────────╮
---          │                      magazine.nvim                      │
---          │     https://github.com/iguanacucumber/magazine.nvim     │
---          ╰─────────────────────────────────────────────────────────╯
 return {
     "iguanacucumber/magazine.nvim",
     name = "nvim-cmp",
@@ -36,11 +32,9 @@ return {
                 end,
             },
             mapping = cmp.mapping.preset.insert({
-                ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                ["<C-h>"] = cmp.mapping(function()
+                ["<C-Space>"] = cmp.mapping(function()
                     if cmp.visible() then
-                        cmp.close()
+                        cmp.abort()
                     else
                         cmp.complete()
                     end
@@ -49,7 +43,7 @@ return {
                     behavior = cmp.ConfirmBehavior.Replace,
                     select = false,
                 }),
-                ["<C-j>"] = cmp.mapping(function(fallback)
+                ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
                     elseif luasnip.expand_or_jumpable() then
@@ -58,7 +52,7 @@ return {
                         fallback()
                     end
                 end, { "i", "s" }),
-                ["<C-k>"] = cmp.mapping(function(fallback)
+                ["<C-Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
                     elseif luasnip.jumpable(-1) then
@@ -69,6 +63,8 @@ return {
                 end, { "i", "s" }),
             }),
             sources = {
+                -- { name = "codeium", max_item_count = 5 },
+                -- { name = "copilot", max_item_count = 5 },
                 { name = "nvim_lsp", max_item_count = 5 },
                 { name = "nvim_lsp_signature_help" },
                 { name = "luasnip", max_item_count = 3 },

@@ -3,8 +3,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Line numbers
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = false
+vim.opt.relativenumber = false
 
 -- Indentation
 vim.opt.expandtab = true

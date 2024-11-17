@@ -1,7 +1,3 @@
---          ╭─────────────────────────────────────────────────────────╮
---          │                      Neo-tree.nvim                      │
---          │     https://github.com/nvim-neo-tree/neo-tree.nvim      │
---          ╰─────────────────────────────────────────────────────────╯
 return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -14,7 +10,7 @@ return {
         require("neo-tree").setup({
             close_if_last_window = true,
             popup_border_style = "rounded",
-            enable_git_status = true,
+            enable_git_status = false,
             enable_diagnostics = true,
 
             filesystem = {
@@ -32,8 +28,8 @@ return {
             },
 
             window = {
-                position = "left",
-                width = 40,
+                position = "bottom",
+                width = 35,
                 mappings = {
                     ["<CR>"] = "open",
                     ["<Tab>"] = "preview",

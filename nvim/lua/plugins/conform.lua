@@ -1,7 +1,3 @@
---          ╭─────────────────────────────────────────────────────────╮
---          │                      conform.nvim                       │
---          │        https://github.com/stevearc/conform.nvim         │
---          ╰─────────────────────────────────────────────────────────╯
 return {
     "stevearc/conform.nvim",
     dependencies = {
@@ -14,6 +10,7 @@ return {
             c = { "clang-format" },
             yaml = { "prettier" },
             zsh = { "beautysh" },
+            bash = { "beautysh" },
             sh = { "beautysh" },
         },
         format_on_save = {
@@ -23,6 +20,9 @@ return {
         formatters = {
             stylua = {
                 prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" },
+            },
+            beautysh = {
+                prepend_args = { "--indent-size", "4" },
             },
         },
     },

@@ -1,7 +1,3 @@
---          ╭─────────────────────────────────────────────────────────╮
---          │                     Cinnamon Scroll                     │
---          │        https://github.com/declancm/cinnamon.nvim        │
---          ╰─────────────────────────────────────────────────────────╯
 return {
     "declancm/cinnamon.nvim",
     version = "*",

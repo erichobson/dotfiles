@@ -1,7 +1,3 @@
---         ╭──────────────────────────────────────────────────────────╮
---         │               tiny-inline-diagnostic.nvim                │
---         │https://github.com/rachartier/tiny-inline-diagnostic.nvim │
---         ╰──────────────────────────────────────────────────────────╯
 return {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy",
@@ -14,12 +10,6 @@ return {
                     [vim.diagnostic.severity.WARN] = "●",
                     [vim.diagnostic.severity.INFO] = "●",
                     [vim.diagnostic.severity.HINT] = "●",
-
-                    -- Alternate icons
-                    -- [vim.diagnostic.severity.ERROR] = "",
-                    -- [vim.diagnostic.severity.WARN] = "",
-                    -- [vim.diagnostic.severity.INFO] = "",
-                    -- [vim.diagnostic.severity.HINT] = "",
                 },
             },
         })
