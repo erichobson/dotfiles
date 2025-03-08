@@ -21,6 +21,7 @@ swiftpm/
 zsh/**/.antidote/
 zsh/**/.zcompcache/
 zsh/**/.zsh_sessions/
+zsh/**/.zshrc.d/aliases.zsh
 zsh/**/.zcompdump*
 zsh/**/.zsh_history
 zsh/**/.zsh_plugins.zsh
