@@ -1,6 +1,22 @@
 # macOS
 **/.DS_Store
 
+# 1Password
+1Password/
+op/
+
+# Raycast
+raycast/
+
+# cheat
+cheat/cheatsheets/
+
+# tio
+tio/
+
+# Swift Package Manager
+swiftpm/
+
 # zsh
 zsh/**/.antidote/
 zsh/**/.zcompcache/
@@ -15,9 +31,3 @@ zsh/**/*.zwc
 zsh/**/*.zwc.old
 zsh/~*
 
-# 1Password
-1Password/
-op/
-
-# cheat
-cheat/
