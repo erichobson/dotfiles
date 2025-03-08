@@ -1,0 +1,27 @@
+return {
+    -- "aaronik/treewalker.nvim",
+    --
+    -- opts = {
+    --     -- Whether to briefly highlight the node after jumping to it
+    --     highlight = false,
+    --     -- How long should above highlight last (in ms)
+    --     highlight_duration = 250,
+    --     -- The color of the above highlight. Must be a valid vim highlight group.
+    --     -- (see :h highlight-group for options)
+    --     highlight_group = "CursorLine",
+    -- },
+    --
+    -- keys = {
+    --     -- movement
+    --     { "<C-k>", "<cmd>Treewalker Up<cr>", mode = { "n", "v" }, silent = true, desc = "Treewalker Up" },
+    --     { "<C-j>", "<cmd>Treewalker Down<cr>", mode = { "n", "v" }, silent = true, desc = "Treewalker Down" },
+    --     { "<C-h>", "<cmd>Treewalker Left<cr>", mode = { "n", "v" }, silent = true, desc = "Treewalker Left" },
+    --     { "<C-l>", "<cmd>Treewalker Right<cr>", mode = { "n", "v" }, silent = true, desc = "Treewalker Right" },
+    --
+    --     -- swapping
+    --     { "<C-S-k>", "<cmd>Treewalker SwapUp<cr>", mode = "n", silent = true, desc = "Treewalker SwapUp" },
+    --     { "<C-S-j>", "<cmd>Treewalker SwapDown<cr>", mode = "n", silent = true, desc = "Treewalker SwapDown" },
+    --     { "<C-S-h>", "<cmd>Treewalker SwapLeft<cr>", mode = "n", silent = true, desc = "Treewalker SwapLeft" },
+    --     { "<C-S-l>", "<cmd>Treewalker SwapRight<cr>", mode = "n", silent = true, desc = "Treewalker SwapRight" },
+    -- },
+}

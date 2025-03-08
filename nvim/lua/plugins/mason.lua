@@ -1,5 +1,6 @@
 return {
     "williamboman/mason.nvim",
+    lazy = false,
     dependencies = {
         "Zeioth/mason-extra-cmds",
         opts = {},
@@ -13,6 +14,16 @@ return {
         "MasonUpdate",
         "MasonUpdateAll",
     },
-    lazy = false,
-    config = true,
+    config = function()
+        require("mason").setup({
+            ui = {
+                border = "rounded",
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗",
+                },
+            },
+        })
+    end,
 }

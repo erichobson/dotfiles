@@ -28,7 +28,7 @@ return {
             },
 
             window = {
-                position = "bottom",
+                position = "float",
                 width = 35,
                 mappings = {
                     ["<CR>"] = "open",
@@ -42,22 +42,36 @@ return {
 
             default_component_configs = {
                 icon = {
-                    folder_closed = "",
-                    folder_open = "",
-                    folder_empty = "",
-                    default = "",
+                    folder_closed = "",
+                    folder_open = "",
+                    folder_empty = "",
+                    default = "",
+                },
+                diagnostics = {
+                    symbols = {
+                        hint = "●",
+                        info = "●",
+                        warn = "●",
+                        error = "●",
+                    },
+                    highlights = {
+                        hint = "DiagnosticHint",
+                        info = "DiagnosticInfo",
+                        warn = "DiagnosticWarn",
+                        error = "DiagnosticError",
+                    },
                 },
                 git_status = {
                     symbols = {
                         added = "✚",
-                        modified = "",
+                        modified = "",
                         deleted = "✖",
-                        renamed = "",
-                        untracked = "",
-                        ignored = "",
-                        unstaged = "",
-                        staged = "",
-                        conflict = "",
+                        renamed = "",
+                        untracked = "",
+                        ignored = "",
+                        unstaged = "",
+                        staged = "",
+                        conflict = "",
                     },
                 },
             },

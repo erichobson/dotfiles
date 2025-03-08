@@ -1,33 +1,95 @@
--- Remove trailing whitespace on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        local save_cursor = vim.fn.getpos(".")
-        vim.cmd([[%s/\s\+$//e]])
-        vim.fn.setpos(".", save_cursor)
-    end,
-})
+local M = {}
 
--- -- Executes the callback function every time a
--- -- language server is attached to a buffer.
--- vim.api.nvim_create_autocmd("LspAttach", {
---     desc = "LSP actions",
---     callback = function(event)
---         local opts = { buffer = event.buf }
---
---         local keymap_opts = function(desc)
---             return vim.tbl_extend("force", opts, { desc = desc })
---         end
---
---         vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", keymap_opts("Hover Documentation"))
---         vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", keymap_opts("Go to Definition"))
---         vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", keymap_opts("Go to Declaration"))
---         vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", keymap_opts("Go to Implementation"))
---         vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", keymap_opts("Go to Type Definition"))
---         vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", keymap_opts("Find References"))
---         vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", keymap_opts("Signature Help"))
---         vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", keymap_opts("Rename"))
---         vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", keymap_opts("Format"))
---         vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", keymap_opts("Code Action"))
---     end,
--- })
+function M.setup()
+    local function augroup(name)
+        return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
+    end
+
+    -- Window Management
+    vim.api.nvim_create_autocmd("VimResized", {
+        group = augroup("window_management"),
+        command = "wincmd =",
+        desc = "Auto-equalize splits when resizing Neovim",
+    })
+
+    -- FileType-specific Settings
+    vim.api.nvim_create_autocmd("FileType", {
+        group = augroup("filetype_settings"),
+        pattern = "*", -- Apply to all filetypes
+        callback = function()
+            vim.opt_local.expandtab = true
+            vim.opt_local.shiftwidth = 4
+            vim.opt_local.tabstop = 4
+        end,
+        desc = "Set indent settings for specific filetypes",
+    })
+
+    -- Spell Checking
+    vim.api.nvim_create_autocmd("FileType", {
+        group = augroup("spell_check"),
+        pattern = { "gitcommit", "markdown", "text", "pandoc" },
+        callback = function()
+            vim.opt_local.spell = true
+            vim.opt_local.spelllang = { "en_us" }
+        end,
+        desc = "Enable spell checking for text-heavy filetypes",
+    })
+
+    -- QuickFix Improvements
+    vim.api.nvim_create_autocmd("FileType", {
+        group = augroup("quickfix"),
+        pattern = { "help", "startuptime", "qf", "lspinfo", "fugitive", "git" },
+        callback = function()
+            vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = true, silent = true })
+        end,
+        desc = "Close certain windows with q",
+    })
+
+    -- Comment Prevention
+    vim.api.nvim_create_autocmd("FileType", {
+        group = augroup("format_options"),
+        pattern = "*",
+        callback = function()
+            vim.opt_local.formatoptions = vim.opt_local.formatoptions - { "c", "r", "o" }
+        end,
+        desc = "Prevent automatic comment insertion",
+    })
+
+    -- QuickFix Auto-open
+    vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+        group = augroup("quickfix_open"),
+        pattern = "[^l]*",
+        callback = function()
+            if #vim.fn.getqflist() > 0 then
+                vim.cmd("copen")
+            end
+        end,
+        desc = "Automatically open quickfix if there are items",
+    })
+
+    -- Create Directory if it Doesn't Exist
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+        group = augroup("mkdir"),
+        callback = function()
+            local dir = vim.fn.expand("<afile>:p:h")
+            if vim.fn.isdirectory(dir) == 0 then
+                vim.fn.mkdir(dir, "p")
+            end
+        end,
+        desc = "Create directory if it doesn't exist",
+    })
+
+    -- Force write undo history
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        group = augroup("mkundo"),
+        pattern = "*",
+        callback = function()
+            if vim.o.undofile then
+                vim.cmd("silent! mkundo")
+            end
+        end,
+        desc = "Force write undo history",
+    })
+end
+
+return M
