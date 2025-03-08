@@ -15,12 +15,9 @@ zsh/**/*.zwc
 zsh/**/*.zwc.old
 zsh/~*
 
-# nvim
-nvim/lazy-lock.json
-nvim/lua/temp/
-
-# ghc
-ghc/
-
 # 1Password
 1Password/
+op/
+
+# cheat
+cheat/
