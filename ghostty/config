@@ -1,0 +1,143 @@
+# Theme settings
+theme = evergarden
+
+# Main font settings
+font-family = "MonoLisa"
+font-style = "Medium"
+font-style-italic = "Medium Italic"
+font-style-bold = "SemiBold"
+font-style-bold-italic = "SemiBold Italic"
+font-size = 12
+font-thicken = false
+term = xterm-256color
+
+# Cell and positioning adjustments
+adjust-cell-height = -2%
+adjust-cell-width = -1%
+adjust-font-baseline = -1
+adjust-underline-position = 2
+adjust-underline-thickness = 1
+
+# Standard coding ligatures
+font-feature = "liga"
+
+# Contextual alternates (whitespace ligatures)
+font-feature = "calt"
+
+# Slashed zero for better readability (0)
+font-feature = "zero"
+
+# Old-style numbers with varying heights
+# font-feature = "onum"
+
+# Script variant for italics
+font-feature = "ss02"
+
+# Alternative 'g'
+font-feature = "ss03"
+
+# Alternative curly brackets {}
+font-feature = "ss07"
+
+# Alternative parentheses ()
+font-feature = "ss08"
+
+# Alternative >= symbols (two-space variant)
+font-feature = "ss09"
+
+# Alternative 'x' for hexadecimal (0xF)
+font-feature = "ss11"
+
+# Thinner backslash (\\)
+font-feature = "ss12"
+
+# Alternative dollar sign ($)
+font-feature = "ss13"
+
+# 'i' without serif
+font-feature = "ss15"
+
+# 'r' without serif
+font-feature = "ss16"
+
+# Alternative .= and ..= operators
+font-feature = "ss17"
+
+# Window behavior and appearance
+macos-titlebar-style = hidden
+window-theme = auto
+window-padding-x = 3
+window-padding-y = 1
+window-padding-balance = true
+
+# Window sizing
+window-inherit-working-directory = true
+window-inherit-font-size = false
+quit-after-last-window-closed = true
+
+# Window decoration and theme
+macos-window-shadow = false
+window-padding-color = background
+
+# Background settings
+background-opacity = 1
+
+# Clipboard behavior
+clipboard-read = ask
+clipboard-write = allow
+
+# Shell integration
+shell-integration = detect
+shell-integration-features = no-cursor
+
+# Performance and rendering
+window-vsync = true
+
+# macOS specific settings
+macos-option-as-alt = true
+
+# Cursor settings
+cursor-style = block
+cursor-style-blink = false
+cursor-color = B2C98F
+cursor-text = 232A2E
+adjust-cursor-thickness = 1
+adjust-cursor-height = 1
+
+# Icon settings
+macos-icon = custom-style
+macos-icon-frame = plastic
+macos-icon-ghost-color = B2C98F
+macos-icon-screen-color = 232A2E
+
+custom-shader-animation = false
+# custom-shader = shaders/animated-gradient-shader.glsl
+# custom-shader = shaders/bettercrt.glsl
+# custom-shader = shaders/bloom.glsl
+# custom-shader = shaders/cineShader-Lava.glsl
+# custom-shader = shaders/crt.glsl
+# custom-shader = shaders/cubes.glsl
+# custom-shader = shaders/dither.glsl
+# custom-shader = shaders/drunkard.glsl
+# custom-shader = shaders/fireworks-rockets.glsl
+# custom-shader = shaders/fireworks.glsl
+# custom-shader = shaders/galaxy.glsl
+# custom-shader = shaders/gears-and-belts.glsl
+# custom-shader = shaders/glitchy.glsl
+# custom-shader = shaders/glow-rgbsplit-twitchy.glsl
+# custom-shader = shaders/gradient-background.glsl
+# custom-shader = shaders/in-game-crt.glsl
+# custom-shader = shaders/inside-the-matrix.glsl
+# custom-shader = shaders/just-snow.glsl
+# custom-shader = shaders/matrix-hallway.glsl
+# custom-shader = shaders/negative.glsl
+# custom-shader = shaders/retro-terminal.glsl
+# custom-shader = shaders/sin-interference.glsl
+# custom-shader = shaders/smoke-and-ghost.glsl
+# custom-shader = shaders/sparks-from-fire.glsl
+# custom-shader = shaders/spotlight.glsl
+# custom-shader = shaders/starfield-colors.glsl
+# custom-shader = shaders/starfield.glsl
+# custom-shader = shaders/tft.glsl
+# custom-shader = shaders/underwater.glsl
+# custom-shader = shaders/water.glsl

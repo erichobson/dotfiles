@@ -1,0 +1,23 @@
+# Evergarden theme for Ghostty
+background = 232A2E
+foreground = D5D6C8
+selection-background = 3F4D52
+selection-foreground = D5D6C8
+
+# Color palette (0-15)
+palette = 0=#232A2E
+palette = 1=#E67E80
+palette = 2=#B2C98F
+palette = 3=#DBBC7F
+palette = 4=#9BB5CF
+palette = 5=#E3A8D1
+palette = 6=#93C9A1
+palette = 7=#D5D6C8
+palette = 8=#313C40
+palette = 9=#E69875
+palette = 10=#3F4D52
+palette = 11=#46565B
+palette = 12=#6E8585
+palette = 13=#CCD4C1
+palette = 14=#5E6C70
+palette = 15=#94AAA0
