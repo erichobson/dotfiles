@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+# Function: ch
+# Description: Interactive cheatsheet viewer using cheat and fzf
+# Usage: ch [command]
+#   - Without arguments: opens fuzzy finder to browse all cheatsheets
+#   - With argument: shows specific cheatsheet
+# Example: ch tar or ch (then search interactively)
+
+function ch {
+    if [ $# -eq 0 ]; then
+        cheat -l | fzf --preview 'cheat {1}'
+    else
+        cheat "$@"
+    fi
+}

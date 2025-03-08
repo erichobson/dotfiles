@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+# Function: calc
+# Description: Calculator function that uses bc for arithmetic operations
+# Usage: calc <expression>
+# Example: calc "2 + 2" or calc "sqrt(16)"
+
+function calc {
+    echo "Result: $(echo "$*" | bc -l)"
+}

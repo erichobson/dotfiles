@@ -1,110 +1,66 @@
 #!/bin/zsh
 
-# Single Character Aliases
-alias _=sudo
-alias g=git
-alias l=lsd
-alias v=nvim
+alias duck="ddgr"
 
-# Directory Navigation
+# Required aliases (kept from original)
+alias mlocal='make -f Makefile.local'
+alias sys='macchina'
+
+# Modern replacements for common commands
+alias ls='eza --icons --git'                # Modern ls with icons and git status
+alias ll='eza -l --icons --git'             # Long list
+alias la='eza -la --icons --no-git'
+alias lt='eza --tree --icons --git-ignore'  # Tree view
+alias cat='bat'                             # Better cat with syntax highlighting
+alias grep='rg'                             # Better grep with ripgrep
+alias find='fd'                             # Better find with fd
+alias top='procs'                           # Better top with procs
+alias du='dust'                             # Better disk usage
+alias diff='delta'                          # Better diff with git-delta
+
+# Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias .....='cd ../../../..'
 alias ~='cd ~'
-alias -- -='cd -'
 
-# Directory Listing
-alias ls='lsd'
-alias ll='lsd -lh'
-alias la='lsd -lAh'
-alias ldot='lsd -ld .*'
-alias tree='lsd --tree'
+# Git shortcuts (with lazygit available, keep these minimal)
+alias g='git'
+alias gs='git status -sb'                   # Short status
+alias lg='lazygit'                          # Use lazygit for everything else
 
-# File Operations
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias rm='rm -iv'
-alias mkdir='mkdir -pv'
-
-# Search and Find
-alias fd='find . -type d -name'
-alias ff='find . -type f -name'
-alias grep='grep --color=auto'
-# alias fzf='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
-
-# System Operations
-alias update='topgrade'
-alias please=sudo
-alias reboot='sudo reboot'
-alias shutdown='sudo shutdown -h now'
-alias ports='netstat -tulanp'
-
-# Application Shortcuts
-alias vi=nvim
-alias vim=nvim
-alias sql='sqlite3'
+# Development
+alias v='nvim'
 alias py='python3'
-alias ipy='ipython'
+alias pip='pip3'
 
-# Git Shortcuts
-alias ga='git add'
-alias gc='git commit'
-alias gp='git push'
-alias gst='git status'
-alias gd='git diff'
-alias gco='git checkout'
+# System operations
+alias c='clear'
+alias please='sudo'
+alias ports='lsof -i -P -n | grep LISTEN'   # Show listening ports
 
-# Tar Operations
-alias tarls="tar -tvf"
-alias untar="tar -xf"
+# tmux
+alias t='tmux attach || tmux new'           # Quick tmux attach/create
+alias tn='tmux new -s'                      # New named session
+alias ta='tmux attach -t'                   # Attach to session
 
-# Zsh Related
-alias zshrc='${EDITOR:-nvim} "${ZDOTDIR:-$HOME}"/.zshrc'
-alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'
-alias zdot='cd ${ZDOTDIR:-~}'
-alias reload='source ~/.zshrc'
+# Directory and file operations
+alias cp='cp -iv'                           # Interactive, verbose copy
+alias mv='mv -iv'                           # Interactive, verbose move
+alias mkdir='mkdir -pv'                     # Create parent dirs, verbose
+alias rm='trash'                            # Use trash instead of rm
+
+# Quick access
+alias vault='cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Vault'
 
 # Networking
-alias myip='curl http://ipecho.net/plain; echo'
-alias ping='ping -c 5'
-alias ipe='curl ipinfo.io/ip'
-alias speedtest='speedtest-cli'
+alias ip='curl ipinfo.io'                   # Get IP info
+alias weather='curl wttr.in'                # Get weather
 
-# Misc and Custom
-alias weather='curl wttr.in'
-alias c='clear'
-alias h='history'
-alias j='jobs -l'
-alias path='echo -e ${PATH//:/\\n}'
-alias now='date +"%T"'
-alias nowdate='date +"%d-%m-%Y"'
-alias vault='cd /Users/eric/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Vault'
+# macOS specific
+alias show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
+alias hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
 
-# Typo Corrections
-alias quit='exit'
-alias cd..='cd ..'
-
-# Docker (if you use it)
-alias dps='docker ps'
-alias dimg='docker images'
-alias drm='docker rm'
-alias drmi='docker rmi'
-alias drun='docker run'
-
-# npm (if you use Node.js)
-alias ni='npm install'
-alias nid='npm install --save-dev'
-alias nig='npm install -g'
-alias nr='npm run'
-alias nst='npm start'
-alias nt='npm test'
-
-# Python Virtual Environment
-alias venv='python3 -m venv ./venv'
-alias activate='source ./venv/bin/activate'
-
-# macOS Specific (if applicable)
-alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
-alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+# OpenStack
+alias openstack="ssh -J erichobson@access.scs.carleton.ca student@134.117.134.117"
+alias openstack-scp="scp -J erichobson@access.scs.carleton.ca student@134.117.134.117:/home/student/a2/erichobson-comp3000-assign2.tar.gz ."

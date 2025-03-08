@@ -1,34 +1,91 @@
-#! /bin/zsh
+#!/bin/zsh
+
+# Function: suyabai
+# Description: Reinstalls and reconfigures yabai window manager with proper permissions
+# Usage: suyabai
+# Requirements:
+# - yabai-cert certificate must be set up
+# - Homebrew installed
+# - sudo access
+# Note: This is required after Homebrew updates yabai
 
 function suyabai {
-
     # Set the certificate name for code signing
     export YABAI_CERT=yabai-cert
 
-    # Stop the yabai service before making changes
-    yabai --stop-service
-
-    # Uninstall the current yabai service
-    yabai --uninstall-service
-
-    # Reinstall yabai using Homebrew
-    brew reinstall koekeishiya/formulae/yabai
-
-    # Code sign the yabai binary with our certificate
-    codesign -fs "${YABAI_CERT:-yabai-cert}" "$(brew --prefix yabai)/bin/yabai"
-
-    # Calculate SHA256 hash of the new yabai binary
-    SHA256=$(shasum -a 256 /opt/homebrew/bin/yabai | awk "{print \$1;}")
-
-    # Update the sudoers file with the new SHA256 hash if it exists
-    if [ -f "/private/etc/sudoers.d/yabai" ]; then
-        # Replace the old SHA256 hash with the new one in the sudoers file
-        sudo sed -i '' -e 's/sha256:[[:alnum:]]*/sha256:'${SHA256}'/' /private/etc/sudoers.d/yabai
+    # Check if Yabai service is running before attempting to stop it
+    if yabai --is-running &> /dev/null; then
+        echo "Stopping yabai service..."
+        if ! yabai --stop-service; then
+            echo "Error: Failed to stop yabai service."
+            return 1
+        fi
     else
-        # Inform user if the sudoers file doesn't exist
-        echo "sudoers file does not exist yet"
+        echo "Yabai service is not running."
     fi
 
-    # Start the yabai service with the new configuration
-    yabai --start-service
+    # Uninstall current service and old files
+    echo "Uninstalling current service and removing old files..."
+    if ! yabai --uninstall-service; then
+        echo "Warning: Failed to uninstall yabai service (may not be installed)."
+    fi
+    sudo rm -rf "$(brew --prefix yabai)/bin/yabai" "$(brew --prefix yabai)/lib/yabai" "$(brew --prefix yabai)/share/yabai"/*
+
+
+    # Uninstall via Homebrew (to be sure)
+    echo "Uninstalling yabai via Homebrew..."
+    brew uninstall koekeishiya/formulae/yabai || true  # Ignore error if not installed
+
+    # Reinstall via Homebrew
+    echo "Reinstalling yabai..."
+    if ! brew reinstall koekeishiya/formulae/yabai; then
+        echo "Error: Failed to reinstall yabai."
+        return 1
+    fi
+
+    # --- CRITICAL: Remove Extended Attributes BEFORE Codesigning ---
+    echo "Removing extended attributes from yabai binary..."
+    sudo xattr -cr "$(brew --prefix yabai)/bin/yabai"
+
+    # Check if the certificate exists
+    if ! security find-certificate -c "${YABAI_CERT:-yabai-cert}" &> /dev/null; then
+        echo "Error: Certificate '${YABAI_CERT:-yabai-cert}' not found.  Please create it."
+        return 1
+    fi
+
+    # Code sign binary (with explicit sudo)
+    echo "Code signing yabai..."
+    if ! sudo codesign -fs "${YABAI_CERT:-yabai-cert}" "$(brew --prefix yabai)/bin/yabai"; then
+        echo "Error: Failed to code sign yabai."
+        return 1
+    fi
+
+    # Update sudoers
+    sudoers_file="/private/etc/sudoers.d/yabai"
+    if grep -q "yabai --load-sa" "$sudoers_file"; then
+        echo "Updating existing sudoers entry for yabai..."
+        sudo sed -i '' -E "s|$(whoami) ALL=\(root\) NOPASSWD:.* yabai --load-sa|$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 "$(which yabai)" | cut -d " " -f 1) $(which yabai) --load-sa|" "$sudoers_file"
+    else
+        echo "Adding new sudoers entry for yabai..."
+        echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee "$sudoers_file" > /dev/null
+    fi
+
+    # Restart service
+    echo "Starting yabai service..."
+    if ! yabai --start-service; then
+        echo "Error: Failed to start yabai service."
+        return 1
+    fi
+
+    # --- CRITICAL: Force Load Scripting Addition and Check ---
+    echo "Forcefully loading scripting addition..."
+    sudo yabai --load-sa
+
+    # Check if SA loaded correctly (query a space - this requires SA)
+    if ! yabai -m query --spaces &> /dev/null; then
+        echo "Error: Scripting addition failed to load.  Check SIP settings!"
+        return 1
+    fi
+
+    echo "Yabai reinstallation complete and scripting addition loaded!"
 }

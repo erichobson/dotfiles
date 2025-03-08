@@ -1,49 +1,39 @@
-# !/bin/zsh
+#!/bin/zsh
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Lazy-load (autoload) Zsh function files from a directory.
+# Load Zsh functions from directory
 ZFUNCDIR=${ZDOTDIR:-$HOME}/.zfunctions
 fpath=($ZFUNCDIR $fpath)
 autoload -Uz $ZFUNCDIR/*(.:t)
 
-# Source zstyles you might use with antidote.
+# Load Zsh completion styles
 [[ -e ${ZDOTDIR:-~}/.zstyles ]] && source ${ZDOTDIR:-~}/.zstyles
 
-# Clone antidote if necessary.
+# Initialize antidote plugin manager
 [[ -d ${ZDOTDIR:-~}/.antidote ]] ||
 git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-~}/.antidote
 
-# Create an amazing Zsh config using antidote plugins.
+# Load antidote and plugins
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
 
-# Set Zsh options
-setopt histignoredups sharehistory
+# Set Zsh history options
+setopt histignoredups
+setopt sharehistory
 
-# Source anything in .zshrc.d.
+# Source configuration files
 for _rc in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh; do
-    # Ignore tilde files.
+    # Skip backup files
     if [[ $_rc:t != '~'* ]]; then
         source "$_rc"
     fi
 done
 unset _rc
 
-# Adjust autosuggest colour
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#94AAA0'
 
-# Initialize completion systems
+# Initialize completion system
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 autoload -Uz compinit && compinit
 
-# Initialize prompt system
+# Initialize and set prompt
 autoload -Uz promptinit && promptinit
-
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+prompt pure

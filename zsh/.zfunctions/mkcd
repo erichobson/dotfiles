@@ -1,4 +1,11 @@
-#! /bin/zsh
+#!/bin/zsh
+
+# Function: mkcd
+# Description: Creates a directory and changes into it in one command
+# Usage: mkcd <directory>
+# Example: mkcd projects/new-project
+#   - Creates projects/new-project if it doesn't exist
+#   - Changes into the directory
 
 function mkcd {
     mkdir -p "$1" && cd "$1"

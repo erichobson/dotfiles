@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+# EZA colors
+export EZA_COLORS="xx=94"

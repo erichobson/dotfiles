@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # Completions
 mattmc3/ez-compinit
 zsh-users/zsh-completions kind:fpath path:src
@@ -15,16 +13,14 @@ belak/zsh-utils path:editor
 belak/zsh-utils path:history
 
 # Prompt
-romkatv/powerlevel10k
+sindresorhus/pure kind:fpath
 
 # Utilities
-zshzoo/macos conditional:is-macos
 belak/zsh-utils path:utility
-romkatv/zsh-bench kind:path
-ohmyzsh/ohmyzsh path:plugins/extract
-MichaelAquilina/zsh-you-should-use
+michaelaquilina/zsh-you-should-use
+zshzoo/macos conditional:is-macos
 
 # Other Fish-like features
-zdharma-continuum/fast-syntax-highlighting  # Syntax highlighting
-zsh-users/zsh-autosuggestions               # Auto-suggestions
-zsh-users/zsh-history-substring-search      # Up/Down to search history
+zdharma-continuum/fast-syntax-highlighting
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search

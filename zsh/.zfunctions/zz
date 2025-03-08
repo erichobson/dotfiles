@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+# Function: zz
+# Description: Enhanced zoxide navigation with fzf and eza integration
+# Usage: zz [directory]
+#   - Without arguments: opens fuzzy finder to select directory
+#   - With argument: jumps to best match using zoxide
+# Note: Automatically lists directory contents after navigation
+
+function zz {
+    if [ $# -eq 0 ]; then
+        cd "$(zoxide query -l | fzf)"
+    else
+        cd "$(zoxide query "$@")"
+    fi
+    eza --git --icons
+}

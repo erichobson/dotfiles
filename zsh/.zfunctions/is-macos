@@ -1,3 +1,9 @@
 #!/bin/zsh
 
+# Function: is-macos
+# Description: Tests if the current system is macOS
+# Usage: is-macos
+# Returns: 0 if macOS, 1 if not
+# Example: if is-macos; then echo "This is macOS"; fi
+
 [[ $OSTYPE == *darwin* ]]
