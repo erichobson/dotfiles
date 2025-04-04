@@ -1,0 +1,3 @@
+[submodule "dotbins"]
+	path = dotbins
+	url = git@github.com:erichobson/dotbins.git
