@@ -39,38 +39,11 @@ hyper - r : yabai -m space --rotate 90
 hyper - y : yabai -m space --mirror y-axis
 hyper - x : yabai -m space --mirror x-axis
 
-# Enhanced window navigation with fallback to spaces (west/east)
-hyper - h : \
-  window_id=$(yabai -m query --windows --window west | jq -r '.id // 0'); \
-  if [ "$window_id" -eq 0 ]; then \
-    prev_space_id=$(yabai -m query --spaces --space prev | jq -r '.index // 0'); \
-    if [ "$prev_space_id" -ne 0 ]; then \
-      has_windows=$(yabai -m query --spaces --space "$prev_space_id" | jq -r '.windows | length > 0'); \
-      if [ "$has_windows" = "true" ]; then \
-        yabai -m space --focus "$prev_space_id"; \
-      fi; \
-    fi; \
-  else \
-    yabai -m window --focus west; \
-  fi
-
-hyper - l : \
-  window_id=$(yabai -m query --windows --window east | jq -r '.id // 0'); \
-  if [ "$window_id" -eq 0 ]; then \
-    next_space_id=$(yabai -m query --spaces --space next | jq -r '.index // 0'); \
-    if [ "$next_space_id" -ne 0 ]; then \
-      has_windows=$(yabai -m query --spaces --space "$next_space_id" | jq -r '.windows | length > 0'); \
-      if [ "$has_windows" = "true" ]; then \
-        yabai -m space --focus "$next_space_id"; \
-      fi; \
-    fi; \
-  else \
-    yabai -m window --focus east; \
-  fi
-
 # Standard window navigation (north/south)
+hyper - h : yabai -m window --focus west
 hyper - j : yabai -m window --focus south
 hyper - k : yabai -m window --focus north
+hyper - l  : yabai -m window --focus east
 
 # Toggle native fullscreen
 hyper - f : yabai -m window --toggle native-fullscreen
